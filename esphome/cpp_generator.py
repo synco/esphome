@@ -141,11 +141,8 @@ class StructInitializer(Expression):
 
     def __init__(self, base: Expression, *args: tuple[str, SafeExpType | None]):
         self.base = base
-        # TODO: args is always a Tuple, is this check required?
-        if not isinstance(args, OrderedDict):
-            args = OrderedDict(args)
         self.args = OrderedDict()
-        for key, value in args.items():
+        for key, value in args:
             if value is None:
                 continue
             exp = safe_exp(value)
